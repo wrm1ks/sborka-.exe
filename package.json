@@ -1,0 +1,35 @@
+{
+  "name": "chitalka-desktop",
+  "version": "1.0.0",
+  "description": "Офлайн-читалка для Windows на основе исходного HTML",
+  "main": "main.cjs",
+  "author": "",
+  "license": "UNLICENSED",
+  "scripts": {
+    "start": "electron .",
+    "build:win": "node scripts/copy-jszip.cjs && electron-builder --win portable --ia32"
+  },
+  "devDependencies": {
+    "electron": "22.3.27",
+    "electron-builder": "22.14.13",
+    "jszip": "3.10.1"
+  },
+  "build": {
+    "appId": "ru.reader.chitalka",
+    "productName": "Читалка",
+    "asar": true,
+    "files": [
+      "main.cjs",
+      "index.html",
+      "jszip.min.js",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "artifactName": "Chitalka-${version}-portable.${ext}"
+    },
+    "artifactName": "Chitalka-${version}-Win7-portable.${ext}"
+  }
+}
