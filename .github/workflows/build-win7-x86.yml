@@ -1,0 +1,29 @@
+name: Build Windows 7 32-bit EXE
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: chitalka-windows
+    steps:
+      - name: Get source
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+      - name: Build 32-bit portable EXE
+        run: npm run build:win
+      - name: Upload EXE
+        uses: actions/upload-artifact@v4
+        with:
+          name: Chitalka-Windows-7-32bit
+          path: chitalka-windows/dist/*.exe
+          if-no-files-found: error
+          retention-days: 14
